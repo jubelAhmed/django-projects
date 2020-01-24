@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blog</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+    <!-- Medium Style Editor -->
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+    <!-- custom css -->
+
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+
+    <!-- icon -->
+    <script src="https://kit.fontawesome.com/556c185ab7.js" crossorigin="anonymous"></script>
+
+
+</head>
+<body class="">
+
+    <!-- navbar -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light  ">
+        <a class="navbar-brand" href="{% url 'post_list' %}">Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+          <ul class="navbar-nav ">
+            <li class="nav-item active">
+              <a class="nav-link " href="{% url 'about' %}">About <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="www.github.com">Github</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link " href="www.linkedin.com">linkedin</a>
+            </li>
+        
+           
+          </ul>
+
+          <ul class="nav loader">
+                {% if user.is_authenticated %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'post_new' %}">New Post</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'post_draft' %}">Drafts</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'logout' %}"> Log Out </a>
+                  </li>
+                  <li class="nav-item ">
+                      <a class="navbar-text text-danger" >Welcome : {{ user.username }}</a>
+                  </li>
+  
+                  {% else %}
+  
+                  <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><span class="glyphicon plyphicon-user">Login</span></a></li>
+  
+                  {% endif %}
+
+                
+                
+            </ul>
+
+        </div>
+      </nav>
+
+
+    <!-- content block -->
+
+    <div class="content container">
+        <div class="row ">
+            <div class="col-md-8 ">
+                <div class="blog_posts loader">
+
+                    {% block content %}
+
+                    {% endblock %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+</html>

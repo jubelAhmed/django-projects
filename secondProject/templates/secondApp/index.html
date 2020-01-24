@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static "css/new.css" %}">
+
+
+    <title>Document</title>
+</head>
+<body>
+    <h2>Welcome To Django Level Two</h1>
+    <h1>Here are the Access Record</h1>
+
+    {% if access_records %}
+
+        <table>
+            <thead>
+                <th>Web Page</th>
+                <th>Added Date</th>
+            </thead>
+            <tbody>
+                {% for acr in access_records %}
+                    <tr>
+                        <td>{{ acr.name }}</td>
+                        <td>{{ acr.date }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}  
+        <p>No Access Record Found</p>  
+    {% endif %}
+
+    
+</body>
+</html>
+
